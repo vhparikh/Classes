@@ -19,3 +19,7 @@ int* Music::getDuration() {
 char* Music::getPublisher() {
   return publisher;
 }
+
+int Music::getType() {
+  return 1;
+}

@@ -15,3 +15,7 @@ char* Game::getPublisher() {
 float* Game::getRating() {
   return &rating;
 }
+
+int Game::getType() {
+  return 0;
+}

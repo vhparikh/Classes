@@ -9,6 +9,7 @@ public:
   Game();
   char* getPublisher();
   float* getRating();
+  virtual int getType();
 private:
   char publisher[100];
   float rating;

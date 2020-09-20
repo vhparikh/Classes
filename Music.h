@@ -10,6 +10,7 @@ public:
   char* getArtist();
   int* getDuration();
   char* getPublisher();
+  virtual int getType();
 private:
   char artist[100];
   int duration;

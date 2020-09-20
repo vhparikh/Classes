@@ -10,6 +10,7 @@ public:
   char* getDirector();
   int* getDuration();
   float* getRating();
+  virtual int getType();
 private:
   char director[100];
   int duration;

@@ -11,6 +11,7 @@ using namespace std;
 
 void ADD(vector<Media*>* vec);
 void SEARCH(vector<Media*>* vec);
+void DELETE(vector<Media*>* vec);
 
 int main()
 {
@@ -30,7 +31,7 @@ int main()
       SEARCH(&media);
     }
     else if (strcmp(input, "DELETE") == 0 || strcmp(input, "delete") == 0) {
-
+      DELETE(&media);
     }
     else if (strcmp(input, "QUIT") == 0 || strcmp(input, "quit") == 0) {
       quit = true;
@@ -92,7 +93,7 @@ void ADD(vector<Media*>* vec)
   }
   
 }
-  
+	    
 void SEARCH(vector<Media*>* vec)
 {
   char input[10];
@@ -107,9 +108,125 @@ void SEARCH(vector<Media*>* vec)
     cin >> title;
     for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
       if (strcmp((*it)->getTitle(), title) == 0) {
-	//cout << (*it)->getTitle() << endl;
+	if ((*it)->getType() == 0) {
+	  cout << "~" << (*it)->getTitle() << " ";
+	  cout << *(*it)->getYear() << " ";
+	  cout << ((Game*)(*it))->getPublisher() << " ";
+	  cout << *((Game*)(*it))->getRating() << endl;
+	}
+	else if ((*it)->getType() == 1) {
+	  cout << "~" << (*it)->getTitle() << " ";
+          cout << *(*it)->getYear() << " ";
+          cout << ((Music*)(*it))->getArtist() << " ";
+          cout << *((Music*)(*it))->getDuration() << " ";
+	  cout << ((Music*)(*it))->getPublisher() << endl;
+	}
+	else {
+	  cout << "~" << (*it)->getTitle() << " ";
+          cout << *(*it)->getYear() << " ";
+          cout << ((Movie*)(*it))->getDirector() << " ";
+          cout << *((Movie*)(*it))->getDuration() << " ";
+          cout << *((Movie*)(*it))->getRating() << endl;
+	}
       }
     }
   }
+  else if (strcmp(input, "YEAR") == 0 || strcmp(input, "year") == 0) {
+    cout << "Enter the year:" << endl;
+    cin >> year;
+
+    for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
+      if (*(*it)->getYear() == year) {
+        if ((*it)->getType() == 0) {
+          cout << "~" << (*it)->getTitle() << " ";
+          cout << *(*it)->getYear() << " ";
+          cout << ((Game*)(*it))->getPublisher() << " ";
+          cout << *((Game*)(*it))->getRating() << endl;
+        }
+        else if ((*it)->getType() == 1) {
+          cout << "~" << (*it)->getTitle() << " ";
+          cout << *(*it)->getYear() << " ";
+          cout << ((Music*)(*it))->getArtist() << " ";
+          cout << *((Music*)(*it))->getDuration() << " ";
+          cout << ((Music*)(*it))->getPublisher() << endl;
+        }
+        else {
+          cout << "~" << (*it)->getTitle() << " ";
+          cout << *(*it)->getYear() << " ";
+          cout << ((Movie*)(*it))->getDirector() << " ";
+          cout << *((Movie*)(*it))->getDuration() << " ";
+          cout << *((Movie*)(*it))->getRating() << endl;
+        }
+      }
+    } 
+  } 
+}
+
+void DELETE(vector<Media*>* vec)
+{
+  char input[10];
+  char title[100];
+  int year;
+  
+  cout << "Delete by TITLE or YEAR" << endl;
+  cin >> input;
+  if (strcmp(input, "TITLE") == 0 || strcmp(input, "title") == 0) {
+    cout << "Enter the title:" << endl;
+    cin >> title;
+    for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
+      if (strcmp((*it)->getTitle(), title) == 0) {
+        if ((*it)->getType() == 0) {
+          cout << "~" << (*it)->getTitle() << " ";
+	  cout << *(*it)->getYear() << " ";
+          cout << ((Game*)(*it))->getPublisher() << " ";
+          cout << *((Game*)(*it))->getRating() << endl;
+	  //cout << "Would you like to delete this game? y/n" << endl;
+	  //cin >> input;
+        }
+	else if ((*it)->getType() == 1) {
+          cout << "~" << (*it)->getTitle() << " ";
+          cout << *(*it)->getYear() << " ";
+          cout << ((Music*)(*it))->getArtist() << " ";
+          cout << *((Music*)(*it))->getDuration() << " ";
+          cout << ((Music*)(*it))->getPublisher() << endl;
+        }
+        else {
+          cout << "~" << (*it)->getTitle() << " ";
+          cout << *(*it)->getYear() << " ";
+          cout << ((Movie*)(*it))->getDirector() << " ";
+          cout << *((Movie*)(*it))->getDuration() << " ";
+          cout << *((Movie*)(*it))->getRating() << endl;
+        }
+      }
+    }
+  }
+  else if (strcmp(input, "YEAR") == 0 || strcmp(input, "year") == 0) {
+    cout << "Enter the year:" << endl;
+    cin >> year;
     
-}  
+    for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
+      if (*(*it)->getYear() == year) {
+        if ((*it)->getType() == 0) {
+          cout << "~" << (*it)->getTitle() << " ";
+          cout << *(*it)->getYear() << " ";
+          cout << ((Game*)(*it))->getPublisher() << " ";
+          cout << *((Game*)(*it))->getRating() << endl;
+        }
+        else if ((*it)->getType() == 1) {
+          cout << "~" << (*it)->getTitle() << " ";
+          cout << *(*it)->getYear() << " ";
+          cout << ((Music*)(*it))->getArtist() << " ";
+          cout << *((Music*)(*it))->getDuration() << " ";
+          cout << ((Music*)(*it))->getPublisher() << endl;
+        }
+        else {
+          cout << "~" << (*it)->getTitle() << " ";
+          cout << *(*it)->getYear() << " ";
+          cout << ((Movie*)(*it))->getDirector() << " ";
+          cout << *((Movie*)(*it))->getDuration() << " ";
+          cout << *((Movie*)(*it))->getRating() << endl;
+        }
+      }
+    }
+  }
+}

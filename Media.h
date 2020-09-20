@@ -11,6 +11,7 @@ public:
   Media();
   char* getTitle();
   int* getYear();
+  virtual int getType();
 private:
   char title[100];
   int year;

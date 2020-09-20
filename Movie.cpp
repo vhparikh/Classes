@@ -19,3 +19,7 @@ int* Movie::getDuration() {
 float* Movie::getRating() {
   return &rating;
 }
+
+int Movie::getType() {
+  return 2;
+}
