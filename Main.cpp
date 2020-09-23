@@ -20,21 +20,11 @@ int main()
   bool quit = false;
   char input[10];
 
-  //Game* game = new Game();
-  //cin.get(game->getTitle(), 100);
-  //cin.get();
-  //cout << game->getTitle()  << endl;
-  
   while (quit == false) {
     cin >> input;
     
     if (strcmp(input, "ADD") == 0 || strcmp(input, "add") == 0) {
-      //Game* game = new Game();
-      //cin.get(game->getTitle(), 100);
-      //cin.get();
-      //cout << game->getTitle() << endl;
       ADD(&media);
-      //cout << *media.at(0)->getYear() << endl;
     }
     else if (strcmp(input, "SEARCH") == 0 || strcmp(input, "search") == 0) {
       SEARCH(&media);
@@ -171,109 +161,133 @@ void SEARCH(vector<Media*>* vec)
   } 
 }
 
+
 void DELETE(vector<Media*>* vec)
 {
   char input[10];
   char title[100];
   int year;
-  
+  int size = vec->size();
+  int counter = 0;
+
   cout << "Delete by TITLE or YEAR" << endl;
   cin >> input;
   if (strcmp(input, "TITLE") == 0 || strcmp(input, "title") == 0) {
     cout << "Enter the title:" << endl;
     cin >> title;
-    for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
-      if (strcmp((*it)->getTitle(), title) == 0) {
-        if ((*it)->getType() == 0) {
-          cout << "~" << (*it)->getTitle() << " ";
-	  cout << *(*it)->getYear() << " ";
-          cout << ((Game*)(*it))->getPublisher() << " ";
-          cout << *((Game*)(*it))->getRating() << endl;
-	  cout << "Would you like to delete this game? y/n" << endl;
-	  cin >> input;
-	  if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	    vec->erase(it);
-	    //it = vec->begin();
-	    cout << "Hello" << endl;
+    while (counter != size) {
+      for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
+	if (strcmp((*it)->getTitle(), title) == 0) {
+	  if ((*it)->getType() == 0) {
+	    cout << "~" << (*it)->getTitle() << " ";
+	    cout << *(*it)->getYear() << " ";
+	    cout << ((Game*)(*it))->getPublisher() << " ";
+	    cout << *((Game*)(*it))->getRating() << endl;
+	    cout << "Would you like to delete this game? y/n" << endl;
+	    cin >> input;
+	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
+	      vec->erase(it);
+	      if (vec->size() == 0) {
+		return;
+	      }
+	      counter++;
+	      break;
+	    }
 	  }
-	}
-	else if ((*it)->getType() == 1) {
-          cout << "~" << (*it)->getTitle() << " ";
-          cout << *(*it)->getYear() << " ";
-          cout << ((Music*)(*it))->getArtist() << " ";
-          cout << *((Music*)(*it))->getDuration() << " ";
-          cout << ((Music*)(*it))->getPublisher() << endl;
-	  cout << "Would you like to delete this game? y/n" << endl;
-          cin >> input;
-          if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-            vec->erase(it);
-            //it = vec->begin();
-	    cout << "Hello" << endl;
+	  else if ((*it)->getType() == 1) {
+	    cout << "~" << (*it)->getTitle() << " ";
+	    cout << *(*it)->getYear() << " ";
+	    cout << ((Music*)(*it))->getArtist() << " ";
+	    cout << *((Music*)(*it))->getDuration() << " ";
+	    cout << ((Music*)(*it))->getPublisher() << endl;
+	    cout << "Would you like to delete this song? y/n" << endl;
+	    cin >> input;
+	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
+	      vec->erase(it);
+	      if (vec->size() == 0) {
+		return;
+	      }
+	      counter++;
+	      break;
+	    }
 	  }
-	}
-        else {
-          cout << "~" << (*it)->getTitle() << " ";
-          cout << *(*it)->getYear() << " ";
-          cout << ((Movie*)(*it))->getDirector() << " ";
-          cout << *((Movie*)(*it))->getDuration() << " ";
-          cout << *((Movie*)(*it))->getRating() << endl;
-	  cout << "Would you like to delete this game? y/n" << endl;
-          cin >> input;
-          if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-            vec->erase(it);
-            //it = vec->begin();
-	    cout << "Hello" << endl;
-          }
-	}
-      }
+	  else {
+	    cout << "~" << (*it)->getTitle() << " ";
+	    cout << *(*it)->getYear() << " ";
+	    cout << ((Movie*)(*it))->getDirector() << " ";
+	    cout << *((Movie*)(*it))->getDuration() << " ";
+	    cout << *((Movie*)(*it))->getRating() << endl;
+	    cout << "Would you like to delete this movie? y/n" << endl;
+	    cin >> input;
+	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
+	      vec->erase(it);
+	      if (vec->size() == 0) {
+		return;
+	      }
+	      counter++;
+	      break;
+	    }
+	  }
+	} 
+      } 
     }
   }
   else if (strcmp(input, "YEAR") == 0 || strcmp(input, "year") == 0) {
     cout << "Enter the year:" << endl;
-    cin >> year;
-    
-    for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
-      if (*(*it)->getYear() == year) {
-        if ((*it)->getType() == 0) {
-          cout << "~" << (*it)->getTitle() << " ";
-          cout << *(*it)->getYear() << " ";
-          cout << ((Game*)(*it))->getPublisher() << " ";
-          cout << *((Game*)(*it))->getRating() << endl;
-	  cout << "Would you like to delete this game? y/n" << endl;
-          cin >> input;
-          if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-            vec->erase(it);
-            //it = vec->begin();
-	    cout << "Hello" << endl;
-          }
-  	}
-        else if ((*it)->getType() == 1) {
-          cout << "~" << (*it)->getTitle() << " ";
-          cout << *(*it)->getYear() << " ";
-          cout << ((Music*)(*it))->getArtist() << " ";
-          cout << *((Music*)(*it))->getDuration() << " ";
-          cout << ((Music*)(*it))->getPublisher() << endl;
-	  cout << "Would you like to delete this game? y/n" << endl;
-          cin >> input;
-          if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-            vec->erase(it);
-            //it = vec->begin();
-	    cout << "Hello" << endl;
-          }
-	}
-        else {
-          cout << "~" << (*it)->getTitle() << " ";
-          cout << *(*it)->getYear() << " ";
-          cout << ((Movie*)(*it))->getDirector() << " ";
-          cout << *((Movie*)(*it))->getDuration() << " ";
-          cout << *((Movie*)(*it))->getRating() << endl;
-	  cout << "Would you like to delete this game? y/n" << endl;
-          cin >> input;
-          if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-            vec->erase(it);
-            //it = vec->begin();
-	    cout << "Hello" << endl;
-          }
+    cin >> year;    
+    while (counter != size) {
+      for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
+	if (*(*it)->getYear() == year) {
+	  if ((*it)->getType() == 0) {
+	    cout << "~" << (*it)->getTitle() << " ";
+	    cout << *(*it)->getYear() << " ";
+	    cout << ((Game*)(*it))->getPublisher() << " ";
+	    cout << *((Game*)(*it))->getRating() << endl;
+	    cout << "Would you like to delete this game? y/n" << endl;
+	    cin >> input;
+	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
+	      vec->erase(it);
+	      if (vec->size() == 0) {
+		return;
+	      }
+	      counter++;
+	      break;
+	    }
+	  }
+	  else if ((*it)->getType() == 1) {
+            cout << "~" << (*it)->getTitle() << " ";
+            cout << *(*it)->getYear() << " ";
+            cout << ((Music*)(*it))->getArtist() << " ";
+            cout << *((Music*)(*it))->getDuration() << " ";
+            cout << ((Music*)(*it))->getPublisher() << endl;
+            cout << "Would you like to delete this song? y/n" << endl;
+            cin >> input;
+            if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
+              vec->erase(it);
+              if (vec->size() == 0) {
+                return;
+              }
+	      counter++;
+	      break;
+            }
+	  }
+	  else {
+            cout << "~" << (*it)->getTitle() << " ";
+            cout << *(*it)->getYear() << " ";
+            cout << ((Movie*)(*it))->getDirector() << " ";
+            cout << *((Movie*)(*it))->getDuration() << " ";
+            cout << *((Movie*)(*it))->getRating() << endl;
+            cout << "Would you like to delete this movie? y/n" << endl;
+            cin >> input;
+            if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
+              vec->erase(it);
+              if (vec->size() == 0) {
+                return;
+              }
+	      counter++;
+	      break;
+            }
+	  }
 	}
       }
     }
