@@ -1,3 +1,8 @@
+//Created by Vatsal Parikh
+//Date 9/24/20
+//users can add search and delete media types
+
+//imports
 #include <iostream>
 #include <cstring>
 #include <iomanip>
@@ -9,10 +14,12 @@
 
 using namespace std;
 
+//method prototypes
 void ADD(vector<Media*>* vec);
 void SEARCH(vector<Media*>* vec);
 void DELETE(vector<Media*>* vec);
 
+//main method
 int main()
 {
 
@@ -21,8 +28,10 @@ int main()
   char input[10];
 
   while (quit == false) {
-    cin >> input;
-    
+    cin.get(input, 10);
+    cin.clear();
+    cin.ignore(10000, '\n');
+        
     if (strcmp(input, "ADD") == 0 || strcmp(input, "add") == 0) {
       ADD(&media);
     }
@@ -45,46 +54,76 @@ void ADD(vector<Media*>* vec)
 {
   char input[10];
   cout << "Would you like to add a GAME, MUSIC or a MOVIE?" << endl;
-  cin >> input;
+  cin.get(input, 10);
+  cin.clear();
+  cin.ignore(10000, '\n');
   
   if (strcmp(input, "GAME") == 0 || strcmp(input, "game") == 0) {
     Game* game = new Game();
     cout << "Game Title:" << endl;
-    cin >> game->getTitle();
+    cin.get(game->getTitle(), 100);
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Game Year:" << endl;
     cin >> *game->getYear();
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Game Publisher:"	<< endl;
-    cin >> game->getPublisher();
+    cin.get(game->getPublisher(), 100);
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Game Rating:" <<	endl;
     cin >> *game->getRating();
+    cin.clear();
+    cin.ignore(10000, '\n');
     vec->push_back(game);
   }
   else if (strcmp(input, "MUSIC") == 0 || strcmp(input, "music") == 0) {
     Music* music = new Music();
     cout << "Music Title:" << endl;
-    cin >> music->getTitle();
+    cin.get(music->getTitle(), 100);
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Music Year:" << endl;
     cin >> *music->getYear();
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Music Artist:" << endl;
-    cin >> music->getArtist();
+    cin.get(music->getArtist(), 100);
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Music Duration:" << endl;
     cin >> *music->getDuration();
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Music Publisher:" << endl;
-    cin >> music->getPublisher();
+    cin.get(music->getPublisher(), 100);
+    cin.clear();
+    cin.ignore(10000, '\n');
     vec->push_back(music);
   }
   else if (strcmp(input, "MOVIE") == 0 || strcmp(input, "movie") == 0) {
     Movie* movie = new Movie();
     cout << "Movie Title:" << endl;
-    cin >> movie->getTitle();
+    cin.get(movie->getTitle(), 100);
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Movie Year:" << endl;
     cin >> *movie->getYear();
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Movie Director:" << endl;
-    cin >> movie->getDirector();
+    cin.get(movie->getDirector(), 100);
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Movie Duration:" << endl;
     cin >> *movie->getDuration();
+    cin.clear();
+    cin.ignore(10000, '\n');
     cout << "Movie Rating:" << endl;
     cin >> *movie->getRating();
+    cin.clear();
+    cin.ignore(10000, '\n');
     vec->push_back(movie);
   }
   else {
@@ -100,11 +139,15 @@ void SEARCH(vector<Media*>* vec)
   int year;
   
   cout << "Search by TITLE or YEAR" << endl;
-  cin >> input;
+  cin.get(input, 10);
+  cin.clear();
+  cin.ignore(10000, '\n');
 
   if (strcmp(input, "TITLE") == 0 || strcmp(input, "title") == 0) {
     cout << "Enter the title:" << endl;
-    cin >> title;
+    cin.get(title, 100);
+    cin.clear();
+    cin.ignore(10000, '\n');
     for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
       if (strcmp((*it)->getTitle(), title) == 0) {
 	if ((*it)->getType() == 0) {
@@ -133,7 +176,9 @@ void SEARCH(vector<Media*>* vec)
   else if (strcmp(input, "YEAR") == 0 || strcmp(input, "year") == 0) {
     cout << "Enter the year:" << endl;
     cin >> year;
-
+    cin.clear();
+    cin.ignore(10000, '\n');
+    
     for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
       if (*(*it)->getYear() == year) {
         if ((*it)->getType() == 0) {
@@ -171,10 +216,16 @@ void DELETE(vector<Media*>* vec)
   int counter = 0;
 
   cout << "Delete by TITLE or YEAR" << endl;
-  cin >> input;
+  cin.get(input, 10);
+  cin.clear();
+  cin.ignore(10000, '\n');
+  
   if (strcmp(input, "TITLE") == 0 || strcmp(input, "title") == 0) {
     cout << "Enter the title:" << endl;
-    cin >> title;
+    cin.get(title, 100);
+    cin.clear();
+    cin.ignore(10000, '\n');
+    
     while (counter != size) {
       for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
 	if (strcmp((*it)->getTitle(), title) == 0) {
@@ -185,6 +236,8 @@ void DELETE(vector<Media*>* vec)
 	    cout << *((Game*)(*it))->getRating() << endl;
 	    cout << "Would you like to delete this game? y/n" << endl;
 	    cin >> input;
+	    cin.clear();
+	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
 	      vec->erase(it);
 	      if (vec->size() == 0) {
@@ -202,6 +255,8 @@ void DELETE(vector<Media*>* vec)
 	    cout << ((Music*)(*it))->getPublisher() << endl;
 	    cout << "Would you like to delete this song? y/n" << endl;
 	    cin >> input;
+	    cin.clear();
+	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
 	      vec->erase(it);
 	      if (vec->size() == 0) {
@@ -219,6 +274,8 @@ void DELETE(vector<Media*>* vec)
 	    cout << *((Movie*)(*it))->getRating() << endl;
 	    cout << "Would you like to delete this movie? y/n" << endl;
 	    cin >> input;
+	    cin.clear();
+	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
 	      vec->erase(it);
 	      if (vec->size() == 0) {
@@ -234,7 +291,9 @@ void DELETE(vector<Media*>* vec)
   }
   else if (strcmp(input, "YEAR") == 0 || strcmp(input, "year") == 0) {
     cout << "Enter the year:" << endl;
-    cin >> year;    
+    cin >> year;
+    cin.clear();
+    cin.ignore(10000, '\n');
     while (counter != size) {
       for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
 	if (*(*it)->getYear() == year) {
@@ -245,6 +304,8 @@ void DELETE(vector<Media*>* vec)
 	    cout << *((Game*)(*it))->getRating() << endl;
 	    cout << "Would you like to delete this game? y/n" << endl;
 	    cin >> input;
+	    cin.clear();
+	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
 	      vec->erase(it);
 	      if (vec->size() == 0) {
@@ -262,6 +323,8 @@ void DELETE(vector<Media*>* vec)
             cout << ((Music*)(*it))->getPublisher() << endl;
             cout << "Would you like to delete this song? y/n" << endl;
             cin >> input;
+	    cin.clear();
+	    cin.ignore(10000, '\n');
             if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
               vec->erase(it);
               if (vec->size() == 0) {
@@ -279,6 +342,8 @@ void DELETE(vector<Media*>* vec)
             cout << *((Movie*)(*it))->getRating() << endl;
             cout << "Would you like to delete this movie? y/n" << endl;
             cin >> input;
+	    cin.clear();
+	    cin.ignore(10000, '\n');
             if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
               vec->erase(it);
               if (vec->size() == 0) {
