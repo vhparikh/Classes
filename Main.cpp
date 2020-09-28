@@ -243,7 +243,8 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      vec->erase(it); //deletes object
+	      delete *it;
+	      it = vec->erase(it); //deletes object
 	      if (vec->size() == 0) {
 		return; 
 	      }
@@ -262,7 +263,8 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      vec->erase(it); //deletes objects
+	      delete *it;
+	      it = vec->erase(it); //deletes objects
 	      if (vec->size() == 0) {
 		return;
 	      }
@@ -281,7 +283,8 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      vec->erase(it); //deletes object
+	      delete *it;
+	      it = vec->erase(it); //deletes object
 	      if (vec->size() == 0) {
 		return;
 	      }
@@ -311,7 +314,8 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      vec->erase(it); //deletes object
+	      delete *it;
+	      it = vec->erase(it); //deletes object
 	      if (vec->size() == 0) {
 		return;
 	      }
@@ -330,7 +334,8 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
             if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-              vec->erase(it); //deletes object
+	      delete *it;
+	      it = vec->erase(it); //deletes object
               if (vec->size() == 0) {
                 return;
               }
@@ -349,7 +354,8 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
             if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-              vec->erase(it); //deletes object
+	      delete *it;
+	      it = vec->erase(it); //deletes object
               if (vec->size() == 0) {
                 return;
               }
