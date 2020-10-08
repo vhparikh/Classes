@@ -230,7 +230,7 @@ void DELETE(vector<Media*>* vec)
     cin.clear();
     cin.ignore(10000, '\n');
     
-    while (counter != size) { //while the whole vector hasn't been searched
+    while (size >= counter) { //while the whole vector hasn't been searched
       for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
 	if (strcmp((*it)->getTitle(), title) == 0) { //if title is found find the type of media object
 	  if ((*it)->getType() == 0) { //game
@@ -243,13 +243,15 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      delete *it;
-	      it = vec->erase(it); //deletes object
-	      if (vec->size() == 0) {
-		return; 
-	      }
+	      //	      delete *it;
+	      vec->erase(it); //deletes object
 	      counter++; //increments counter
 	      break; //breaks out of for loop to reset iterator
+	      //return;
+	    }
+	    else {
+	      counter++;
+	      //break;
 	    }
 	  }
 	  else if ((*it)->getType() == 1) { //music
@@ -263,13 +265,14 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      delete *it;
-	      it = vec->erase(it); //deletes objects
-	      if (vec->size() == 0) {
-		return;
-	      }
+	      //delete *it;
+	      vec->erase(it); //deletes objects
 	      counter++; //increments counter
 	      break; //breaks out of for loop to reset iterator
+	    }
+	    else {
+	      counter++;
+	      //break;
 	    }
 	  }
 	  else { //movie
@@ -283,17 +286,18 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      delete *it;
-	      it = vec->erase(it); //deletes object
-	      if (vec->size() == 0) {
-		return;
-	      }
+	      //delete *it;
+	      vec->erase(it); //deletes object
 	      counter++; //increments counter
 	      break; //breaks out of for loop to reset iterator
 	    }
+	    else {
+	      counter++;
+	      //break;
+	    }
 	  }
 	} 
-      } 
+      }
     }
   }
   else if (strcmp(input, "YEAR") == 0 || strcmp(input, "year") == 0) {
@@ -314,13 +318,13 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      delete *it;
-	      it = vec->erase(it); //deletes object
-	      if (vec->size() == 0) {
-		return;
-	      }
+	      //delete *it;
+	      vec->erase(it); //deletes object
 	      counter++; //increments counter
 	      break; //breaks out of for loop to reset iterator
+	    }
+	    else {
+	      counter++;
 	    }
 	  }
 	  else if ((*it)->getType() == 1) { //music
@@ -334,14 +338,14 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
             if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      delete *it;
-	      it = vec->erase(it); //deletes object
-              if (vec->size() == 0) {
-                return;
-              }
+	      //delete *it;
+	      vec->erase(it); //deletes object
 	      counter++; //increments counter
 	      break; //breaks out of for loop to reset iterator
             }
+	    else {
+	      counter++;
+	    }
 	  }
 	  else { //movie
             cout << "~" << (*it)->getTitle() << " ";
@@ -354,14 +358,14 @@ void DELETE(vector<Media*>* vec)
 	    cin.clear();
 	    cin.ignore(10000, '\n');
             if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      delete *it;
-	      it = vec->erase(it); //deletes object
-              if (vec->size() == 0) {
-                return;
-              }
+	      //delete *it;
+	      vec->erase(it); //deletes object
 	      counter++; //increments counter
 	      break; //breaks out of for loop to reset iterator
             }
+	    else {
+	      counter++;
+	    }
 	  }
 	}
       }
