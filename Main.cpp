@@ -219,156 +219,177 @@ void DELETE(vector<Media*>* vec)
   int size = vec->size();
   int counter = 0;
 
+  if (vec->size() == 0) { //if vector is empty then return
+    cout << "There are no media objects in the database" << endl;
+    return;
+  }
+  
   cout << "Delete by TITLE or YEAR" << endl;
   cin.get(input, 10); //get input
   cin.clear();
   cin.ignore(10000, '\n');
-  
+
   if (strcmp(input, "TITLE") == 0 || strcmp(input, "title") == 0) {
     cout << "Enter the title:" << endl;
     cin.get(title, 100); //get title
     cin.clear();
     cin.ignore(10000, '\n');
-    
-    while (size >= counter) { //while the whole vector hasn't been searched
+    while (vec->size() > 0 && size > counter) { //while vector isn't empty and vector hasn't been searched
       for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
-	if (strcmp((*it)->getTitle(), title) == 0) { //if title is found find the type of media object
+	if (strcmp((*it)->getTitle(), title) == 0) { //if title is found find out the media type
 	  if ((*it)->getType() == 0) { //game
 	    cout << "~" << (*it)->getTitle() << " ";
-	    cout << *(*it)->getYear() << " ";
-	    cout << ((Game*)(*it))->getPublisher() << " ";
-	    cout << *((Game*)(*it))->getRating() << endl;
-	    cout << "Would you like to delete this game? y/n" << endl;
-	    cin >> input; //get confirmation
-	    cin.clear();
-	    cin.ignore(10000, '\n');
-	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      //	      delete *it;
-	      vec->erase(it); //deletes object
+            cout << *(*it)->getYear() << " ";
+            cout << ((Game*)(*it))->getPublisher() << " ";
+            cout << *((Game*)(*it))->getRating() << endl;
+            cout << "Would you like to delete this game? y/n" << endl;
+            cin.get(input, 10); //get confirmation                                                             
+            cin.clear();
+            cin.ignore(10000, '\n');
+	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) { //if y
+	      delete *it;
+	      it = vec->erase(it); //delete object
 	      counter++; //increments counter
-	      break; //breaks out of for loop to reset iterator
-	      //return;
+	      if (vec->size() == 0) { //if vector is now empty return
+		return;
+	      }
+	      else { //else break out of loop to reset it
+		break;
+	      }
 	    }
-	    else {
-	      counter++;
-	      //break;
-	    }
+	    counter++; //increment counter even if object is not deleted
 	  }
 	  else if ((*it)->getType() == 1) { //music
 	    cout << "~" << (*it)->getTitle() << " ";
-	    cout << *(*it)->getYear() << " ";
+            cout << *(*it)->getYear() << " ";
 	    cout << ((Music*)(*it))->getArtist() << " ";
 	    cout << *((Music*)(*it))->getDuration() << " ";
 	    cout << ((Music*)(*it))->getPublisher() << endl;
 	    cout << "Would you like to delete this song? y/n" << endl;
-	    cin >> input; //get confirmation
-	    cin.clear();
-	    cin.ignore(10000, '\n');
+            cin.get(input, 10);                                                            
+            cin.clear();
+            cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      //delete *it;
-	      vec->erase(it); //deletes objects
-	      counter++; //increments counter
-	      break; //breaks out of for loop to reset iterator
-	    }
-	    else {
+	      delete *it;
+	      it = vec->erase(it);
 	      counter++;
-	      //break;
+	      if (vec->size() == 0) {
+		return;
+	      }
+	      else {
+		break;
+	      }
 	    }
+	    counter++;
 	  }
 	  else { //movie
 	    cout << "~" << (*it)->getTitle() << " ";
-	    cout << *(*it)->getYear() << " ";
+            cout << *(*it)->getYear() << " ";
 	    cout << ((Movie*)(*it))->getDirector() << " ";
 	    cout << *((Movie*)(*it))->getDuration() << " ";
 	    cout << *((Movie*)(*it))->getRating() << endl;
 	    cout << "Would you like to delete this movie? y/n" << endl;
-	    cin >> input; //get confirmation
-	    cin.clear();
+            cin.get(input, 10);
+            cin.clear();
 	    cin.ignore(10000, '\n');
 	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      //delete *it;
-	      vec->erase(it); //deletes object
-	      counter++; //increments counter
-	      break; //breaks out of for loop to reset iterator
-	    }
-	    else {
+	      delete *it;
+	      it = vec->erase(it);
 	      counter++;
-	      //break;
+	      if (vec->size() == 0) {
+		return;
+	      }
+	      else {
+		break;
+	      }
 	    }
+	    counter++;
 	  }
-	} 
+	}
+	counter++; //increments counter even if the object doesn't meet search param
       }
     }
   }
-  else if (strcmp(input, "YEAR") == 0 || strcmp(input, "year") == 0) {
+  else if (strcmp(input, "YEAR") == 0 || strcmp(input, "year") == 0) { //if user is deleting by year
     cout << "Enter the year:" << endl;
     cin >> year; //gets year
     cin.clear();
     cin.ignore(10000, '\n');
-    while (counter != size) { //while the whole vector hasnt been searched
+    while (vec->size() > 0 && size > counter) { //while vector isn't empty and vector hasn't been searched
       for (vector<Media*>::iterator it = vec->begin(); it != vec->end(); it++) {
-	if (*(*it)->getYear() == year) { //if year is found find type of media object
+	if (*(*it)->getYear() == year) { //if year is found find the media type
 	  if ((*it)->getType() == 0) { //game
 	    cout << "~" << (*it)->getTitle() << " ";
-	    cout << *(*it)->getYear() << " ";
-	    cout << ((Game*)(*it))->getPublisher() << " ";
-	    cout << *((Game*)(*it))->getRating() << endl;
-	    cout << "Would you like to delete this game? y/n" << endl;
-	    cin >> input; //get confirmation
-	    cin.clear();
-	    cin.ignore(10000, '\n');
-	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      //delete *it;
-	      vec->erase(it); //deletes object
-	      counter++; //increments counter
-	      break; //breaks out of for loop to reset iterator
+            cout << *(*it)->getYear() << " ";
+            cout << ((Game*)(*it))->getPublisher() << " ";
+            cout << *((Game*)(*it))->getRating() << endl;
+            cout << "Would you like to delete this game? y/n" << endl;
+            cin.get(input, 10); //get confirmation                                                             
+            cin.clear();
+            cin.ignore(10000, '\n');
+	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) { //if y
+	      delete *it;
+	      it = vec->erase(it); //delete object
+	      counter++; //increment counter
+	      if (vec->size() == 0) { //if vector is now empty then return
+		return;
+	      }
+	      else { //else break out of for loop to reset it
+		break;
+	      }
 	    }
-	    else {
-	      counter++;
-	    }
+	    counter++; //increment counter even if object isn't deleted
 	  }
 	  else if ((*it)->getType() == 1) { //music
-            cout << "~" << (*it)->getTitle() << " ";
+	    cout << "~" << (*it)->getTitle() << " ";
             cout << *(*it)->getYear() << " ";
             cout << ((Music*)(*it))->getArtist() << " ";
             cout << *((Music*)(*it))->getDuration() << " ";
             cout << ((Music*)(*it))->getPublisher() << endl;
             cout << "Would you like to delete this song? y/n" << endl;
-            cin >> input; //get confirmation
-	    cin.clear();
-	    cin.ignore(10000, '\n');
-            if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      //delete *it;
-	      vec->erase(it); //deletes object
-	      counter++; //increments counter
-	      break; //breaks out of for loop to reset iterator
-            }
-	    else {
+            cin.get(input, 10);
+            cin.clear();
+            cin.ignore(10000, '\n');
+	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
+	      delete *it;
+	      it = vec->erase(it);
 	      counter++;
+	      if (vec->size() == 0) {
+		return;
+	      }
+	      else {
+		break;
+	      }
 	    }
+	    counter++;
 	  }
 	  else { //movie
-            cout << "~" << (*it)->getTitle() << " ";
+	    cout << "~" << (*it)->getTitle() << " ";
             cout << *(*it)->getYear() << " ";
             cout << ((Movie*)(*it))->getDirector() << " ";
             cout << *((Movie*)(*it))->getDuration() << " ";
             cout << *((Movie*)(*it))->getRating() << endl;
             cout << "Would you like to delete this movie? y/n" << endl;
-            cin >> input; //get confirmation
-	    cin.clear();
-	    cin.ignore(10000, '\n');
-            if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
-	      //delete *it;
-	      vec->erase(it); //deletes object
-	      counter++; //increments counter
-	      break; //breaks out of for loop to reset iterator
-            }
-	    else {
+            cin.get(input, 10);
+            cin.clear();
+            cin.ignore(10000, '\n');
+	    if (strcmp(input, "Y") == 0 || strcmp(input, "y") == 0) {
+	      delete *it;
+	      it = vec->erase(it);
 	      counter++;
+	      if (vec->size() == 0) {
+		return;
+	      }
+	      else {
+		break;
+	      }
 	    }
+	    counter++;
 	  }
 	}
+	counter++; //even if object didn't meet search param increment counter
       }
     }
   }
 }
+
